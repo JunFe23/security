@@ -43,7 +43,7 @@ public class IndexController {
 		return "manager";
 	}
 	
-	// 스프링시큐리티가 해당주소를 낚아채버림. - Security Config파일이 작동 안함.
+	// 스프링시큐리티가 해당주소를 낚아채버림. - Security Config파일이 작동 안함	
 	@GetMapping("/loginForm")
 	public String loginForm() {
 		return "loginForm";
