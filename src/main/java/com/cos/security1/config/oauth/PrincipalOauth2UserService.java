@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 
-	// 후처리되는 함수.
+	// 구글로 부터 받은 userRequest 데이터에 대한 후처리되는 함수.
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-		System.out.println("userRequest : "+userRequest);
+		System.out.println("getClientRegistration : "+userRequest.getClientRegistration());
+		System.out.println("getAccessToken : "+userRequest.getAccessToken());
+		System.out.println("userRequest : "+super.loadUser(userRequest).getAttributes());
+		
+		// 회원가입을 강제로 진행.
 		return super.loadUser(userRequest);
 	}
 }
