@@ -40,13 +40,22 @@ public class IndexController {
 	
 	@GetMapping("/test/oauth/login")
 	public @ResponseBody String loginOauthTest(
-			Authentication authentication) { //DI(의존성 주입)
+			Authentication authentication,
+			@AuthenticationPrincipal OAuth2User oauth) { //DI(의존성 주입)
 		System.out.println("/test/oauth/login==============");
 		OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 		System.out.println("authentication : " + oAuth2User.getAttributes());
-		
+		System.out.println("oauth2User : " + oauth.getAttributes());
 		return "OAuth세션정보 확인하기.";
 	}
+	// 정리
+	// 스프링시큐리티는 자기만의 시큐리티 세션을 들고 있음.
+	// 원래 서버가 관리하는 세션 안에 시큐리티가 관리하는 세션이 따로 있음.
+	// 시큐리티 세션 안에 들어갈 수 있는 객체 타입은 Authentication 객체밖에 없다.
+	// Authentication 객체 안에 들어갈 수 있는 타입은 userDetails, OAuth2User
+	// 일반적인 로그인 하면 UsesrDetails / OAuth로그인 하면 OAuth2User
+	// PrincipalDetails타입으로 둘다 받아두면 두 로그인 모두 사용 가능.
+	
 	
 	// localhost:8080/
 	// localhost:8080
